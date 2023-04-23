@@ -1,0 +1,3 @@
+C:/Users/Anton/POO/Richarte_Gonzalez_Antonio/P0/cmake-build-debug/CMakeFiles/P0.dir
+C:/Users/Anton/POO/Richarte_Gonzalez_Antonio/P0/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Anton/POO/Richarte_Gonzalez_Antonio/P0/cmake-build-debug/CMakeFiles/rebuild_cache.dir
