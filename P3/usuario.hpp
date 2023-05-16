@@ -85,6 +85,9 @@ public:
 
     // Operador de inserción en flujo de salida.
     friend std::ostream& operator << (std::ostream& os, const Usuario& us);
+
+    // Vacíar carrito.
+    void vaciar_carro();
 private:
     const Cadena identificador_;
     const Cadena nombre_;
@@ -97,8 +100,7 @@ private:
     // Usuarios registrados en el sistema.
     static std::unordered_set<Cadena> registrados;
 
-    // Vacíar carrito.
-    void vaciar_carrito();
+
 };
 
 // El carrito de la compra.

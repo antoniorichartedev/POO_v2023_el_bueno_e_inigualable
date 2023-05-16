@@ -83,7 +83,7 @@ void Usuario::compra(Articulo &articulo, unsigned int cant) {
     }
 }
 
-void Usuario::vaciar_carrito() {
+void Usuario::vaciar_carro() {
     articulos_.clear();
 }
 

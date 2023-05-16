@@ -8,9 +8,20 @@
 #include "../P1/cadena.hpp"
 #include "usuario.hpp"
 #include <set>
+using namespace std;
 
-
+// Declaración adelantada.
 class Usuario;
+
+// clases de objetos función
+struct EsBlanco: public std::unary_function<char,bool>{
+    bool operator () (char c) const { return isspace(c); };
+};
+
+struct EsDigito: public std::unary_function<char,bool>{
+    bool operator () (char c) const { return isdigit(c); };
+};
+
 
 class Numero{
 public:
@@ -79,6 +90,9 @@ public:
     private:
         Numero n_;
     };
+
+    // Clase de excepción Tarjeta::Desactivada, pero vacía.
+    class Desactivada {};
 
     // Métodos Observadores.
     inline const Numero& numero() const noexcept { return numTarj_; };

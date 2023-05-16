@@ -1,0 +1,10 @@
+****************************************
+****** Pasos a seguir para la P3 *******
+****************************************
+
+1.- LíneaPedido. ---------------> Terminado.
+2.- Usuario-Pedido. ------------> Terminado.
+3.- Pedido-articulo. -----------> Terminado.
+4.- Pedido. --------------------> Terminado.
+5.- Numero. -------------------->
+

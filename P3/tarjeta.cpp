@@ -3,35 +3,31 @@
 //
 #include "tarjeta.hpp"
 #include <cstring>
+#include <functional>
 
 // Añadimos la función luhn.
 bool luhn(const Cadena&);
 
 Numero::Numero(const Cadena &numtarj) {
-    unsigned int tamaux = 0;
 
     // creamos una cadena auxiliar con el tamaño de la cadena que recibe
     // el constructor por parámetro.
-    Cadena aux(numtarj.length());
+    Cadena aux{numtarj};
 
-    for(unsigned int i = 0; i < numtarj.length(); i++){
-        // Si no es un espacio, seguimos.
-        if(!isspace((unsigned char)numtarj[i])){
+    // Utilizamos remove_if poniéndole el predicado EsBlanco{}, es decir, vamos a mirar desde el principio de la cadena
+    // hasta el final de la misma y, a su paso, vamos borrando cada espacio en blanco que encontremos.
+    auto eliminarespacios = remove_if(aux.begin(), aux.end(), EsBlanco());
 
-            // Si el caracter sobre el que estamos no es ni un dígito
-            // ni un espacio, se lanza la excepción Incorrecto.
-            if(!isdigit((unsigned char) numtarj[i])){
-                throw Incorrecto{DIGITOS};
-            }
-
-            // Le asignamos el caracter actual a aux.
-            aux[tamaux++] = numtarj[i];
-        }
+    if(eliminarespacios != aux.end()){
+        *eliminarespacios = '\0';
+        Cadena aux2 (aux.c_str());
+        aux = aux2;
     }
 
-    if(tamaux != numtarj.length()){
-        // Utilizamos la función substr de Cadena para obtener el tamaño justo y necesario.
-        aux = aux.substr(0, tamaux);
+    // Utilizamos find_if para ver si en la Cadena tenemos algún carácter que no sea un dígito.
+    // En dicho caso, devolveremos la excepción Incorrecto{DIGITOS}.
+    if(std::find_if(aux.begin(), aux.end(), not1(EsDigito{})) != aux.end()){
+        throw Incorrecto{DIGITOS};
     }
 
     // Si la longitud de la tarjeta se pasa del rango, lanzamos la excepción correspondiente.
@@ -72,7 +68,6 @@ Tarjeta::Tarjeta(const Numero &num, Usuario &user, const Fecha &fecha_cad):
     // Asignamos esta tarjeta a su usuario.
     user.es_titular_de(*this);
 
-    // Recuerda el punto 5.6
     if(!tarjetasactivas.insert(num).second){
         throw Num_duplicado{num};
     }
